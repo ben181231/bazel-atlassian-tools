@@ -17,6 +17,7 @@ def _golangcilint_impl(ctx):
         "@@PREFIX_DIR_PATH@@": shell.quote(paths.dirname(ctx.attr.prefix)),
         "@@PREFIX_BASE_NAME@@": shell.quote(paths.basename(ctx.attr.prefix)),
         "@@NEW_GOROOT@@": shell.quote(sdk.root_file.dirname),
+        "@@GOPRIVATE@@": shell.quote(ctx.attr.go_private),
     }
     ctx.actions.expand_template(
         template = ctx.file._runner,
@@ -58,6 +59,10 @@ _golangcilint = rule(
         "prefix": attr.string(
             mandatory = True,
             doc = "Go import path of this project i.e. where in GOPATH you would put it. E.g. github.com/atlassian/bazel-tools",
+        ),
+        "go_private": attr.string(
+            doc = "The $GOPRIVATE environemnt variable",
+            default = "",
         ),
         "_golangcilint": attr.label(
             default = "@com_github_atlassian_bazel_tools_golangcilint//:linter",

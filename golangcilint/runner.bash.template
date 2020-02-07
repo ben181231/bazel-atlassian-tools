@@ -7,6 +7,7 @@ ARGS=@@ARGS@@
 PREFIX_DIR_PATH=@@PREFIX_DIR_PATH@@
 PREFIX_BASE_NAME=@@PREFIX_BASE_NAME@@
 NEW_GOROOT=@@NEW_GOROOT@@
+GOPRIVATE=@@GOPRIVATE@@
 
 mkdir -p "src/${PREFIX_DIR_PATH}"
 ln -snf\
@@ -27,6 +28,7 @@ cd "${CURDIR}"
     GOPATH="${NEW_GOPATH}"\
     GOROOT="${NEW_GOROOT}"\
     GOCACHE="$(mktemp -d)"\
+    GOPRIVATE="${GOPRIVATE}"\
     GOLANGCI_LINT_CACHE="$(mktemp -d)"\
     PATH="${NEW_PATH}"\
     PWD="${CURDIR}"\
